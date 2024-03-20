@@ -10,7 +10,7 @@ public class Lista1 {
         Scanner scanner = new Scanner(System.in);
         int resposta;
         do {
-            System.out.println("[1]  - Adicionar contato\n" +
+            System.out.println("[1] - Adicionar contato\n" +
                     "[2] - Remover contato\n" +
                     "[0] - Sair");
             System.out.print("Resposta: ");
@@ -19,7 +19,8 @@ public class Lista1 {
             // Adicionando nome e numero a lista
             if (resposta == 1) {
                 System.out.print("Nome: ");
-                String nome = scanner.next();
+                String nome = scanner.nextLine();
+                nome = scanner.nextLine();
                 System.out.print("Número: ");
                 int numero = scanner.nextInt();
                 nomes.add(nome);
@@ -31,7 +32,8 @@ public class Lista1 {
             // Removendo nome e numero da lista
             if (resposta == 2) {
                 System.out.print("Nome do contato a ser removido: ");
-                String nome = scanner.next();
+                String nome = scanner.nextLine();
+                nome = scanner.nextLine();
 
                 for (int i = 0; i < nomes.size(); i++) {
                     if (nomes.get(i).equals(nome)){
@@ -67,12 +69,13 @@ public class Lista1 {
             if (resposta == 1) {
                 System.out.println("===== NOVO PEDIDO =====");
                 System.out.print("Sabor da pizza: ");
-                String sabor = scanner.next();
+                String sabor = scanner.nextLine();
+                sabor = scanner.nextLine();
                 System.out.print("Endereço de entrega: ");
-                String endereco = scanner.next();
+                String endereco = scanner.nextLine();
 
                 sabores.push(sabor);
-                enderecos.push(endereco); // falta decidir o que fazer com os endereços
+                enderecos.push(endereco);
 
                 System.out.println("Pedido finalizado com sucesso!");
             }
@@ -82,6 +85,7 @@ public class Lista1 {
                 if (!sabores.empty()) {
                     System.out.print("Pizza " + sabores.peek());
                     sabores.pop();
+                    enderecos.pop();
                     System.out.println(" removida com sucesso!");
                 }
                 else {
@@ -102,8 +106,9 @@ public class Lista1 {
             // Listando pizzas
             else if (resposta == 4){
                 Iterator<String> i = sabores.iterator();
+                Iterator<String> j = enderecos.iterator();
                 while (i.hasNext()) {
-                    System.out.print(i.next() + " - ");
+                    System.out.print("Sabor: " + i.next() + ", enderço: " + j.next() + "\n");
                 }
             }
         } while(resposta != 0);
@@ -131,17 +136,24 @@ public class Lista1 {
                 System.out.print("CPF do aluno: ");
                 cpf = scanner.nextInt();
                 System.out.print("Nome do aluno: ");
-                nome = scanner.next();
+                nome = scanner.nextLine();
+                nome = scanner.nextLine();
 
-                mapa.put(cpf, nome);
-                System.out.println("Aluno adicionado com sucesso!");
+                if (mapa.containsKey(cpf)) {
+                    System.out.println("O aluno não foi adicionado!");
+                    System.out.println("Este CPF já esta cadastrado!");
+                }
+                else {
+                    mapa.put(cpf, nome);
+                    System.out.println("Aluno adicionado com sucesso!");
+                }
             }
 
             // Remover aluno
             else if (resposta == 2) {
                 int cpf;
 
-                System.out.println("cpf do aluno que deseja remover: ");
+                System.out.print("cpf do aluno que deseja remover: ");
                 cpf = scanner.nextInt();
 
                 if (mapa.containsKey(cpf)) {
